@@ -68,3 +68,34 @@ func TestVBoxManageConfigPrepare_PostVBoxManage(t *testing.T) {
 		t.Fatalf("bad: %#v", c.VBoxManagePost)
 	}
 }
+
+func TestVBoxManageConfigPrepare_PreVBoxManage(t *testing.T) {
+	// Test with empty
+	c := new(VBoxManageConfig)
+	errs := c.Prepare(interpolate.NewContext())
+	if len(errs) > 0 {
+		t.Fatalf("err: %#v", errs)
+	}
+
+	if !reflect.DeepEqual(c.VBoxManagePre, [][]string{}) {
+		t.Fatalf("bad: %#v", c.VBoxManagePre)
+	}
+
+	// Test with a good one
+	c = new(VBoxManageConfig)
+	c.VBoxManagePre = [][]string{
+		{"foo", "bar", "baz"},
+	}
+	errs = c.Prepare(interpolate.NewContext())
+	if len(errs) > 0 {
+		t.Fatalf("err: %#v", errs)
+	}
+
+	expected := [][]string{
+		{"foo", "bar", "baz"},
+	}
+
+	if !reflect.DeepEqual(c.VBoxManagePre, expected) {
+		t.Fatalf("bad: %#v", c.VBoxManagePre)
+	}
+}

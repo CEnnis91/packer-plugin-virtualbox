@@ -45,6 +45,10 @@ type VBoxManageConfig struct {
 	// except that it is run after the virtual machine is shutdown, and before the
 	// virtual machine is exported.
 	VBoxManagePost [][]string `mapstructure:"vboxmanage_post" required:"false"`
+	// Identical to vboxmanage,
+	// except that it is run after the virtual machine is created or imported,
+	// and before anything is attached.
+	VBoxManagePre [][]string `mapstructure:"vboxmanage_pre" required:"false"`
 }
 
 func (c *VBoxManageConfig) Prepare(ctx *interpolate.Context) []error {
@@ -54,6 +58,10 @@ func (c *VBoxManageConfig) Prepare(ctx *interpolate.Context) []error {
 
 	if c.VBoxManagePost == nil {
 		c.VBoxManagePost = make([][]string, 0)
+	}
+
+	if c.VBoxManagePre == nil {
+		c.VBoxManagePre = make([][]string, 0)
 	}
 
 	return nil

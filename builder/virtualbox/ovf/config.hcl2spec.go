@@ -104,6 +104,7 @@ type FlatConfig struct {
 	ACPIShutdown              *bool             `mapstructure:"acpi_shutdown" required:"false" cty:"acpi_shutdown" hcl:"acpi_shutdown"`
 	VBoxManage                [][]string        `mapstructure:"vboxmanage" required:"false" cty:"vboxmanage" hcl:"vboxmanage"`
 	VBoxManagePost            [][]string        `mapstructure:"vboxmanage_post" required:"false" cty:"vboxmanage_post" hcl:"vboxmanage_post"`
+	VBoxManagePre             [][]string        `mapstructure:"vboxmanage_pre" required:"false" cty:"vboxmanage_pre" hcl:"vboxmanage_pre"`
 	VBoxVersionFile           *string           `mapstructure:"virtualbox_version_file" required:"false" cty:"virtualbox_version_file" hcl:"virtualbox_version_file"`
 	GuestAdditionsMode        *string           `mapstructure:"guest_additions_mode" cty:"guest_additions_mode" hcl:"guest_additions_mode"`
 	GuestAdditionsInterface   *string           `mapstructure:"guest_additions_interface" required:"false" cty:"guest_additions_interface" hcl:"guest_additions_interface"`
@@ -226,6 +227,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"acpi_shutdown":                &hcldec.AttrSpec{Name: "acpi_shutdown", Type: cty.Bool, Required: false},
 		"vboxmanage":                   &hcldec.AttrSpec{Name: "vboxmanage", Type: cty.List(cty.List(cty.String)), Required: false},
 		"vboxmanage_post":              &hcldec.AttrSpec{Name: "vboxmanage_post", Type: cty.List(cty.List(cty.String)), Required: false},
+		"vboxmanage_pre":               &hcldec.AttrSpec{Name: "vboxmanage_pre", Type: cty.List(cty.List(cty.String)), Required: false},
 		"virtualbox_version_file":      &hcldec.AttrSpec{Name: "virtualbox_version_file", Type: cty.String, Required: false},
 		"guest_additions_mode":         &hcldec.AttrSpec{Name: "guest_additions_mode", Type: cty.String, Required: false},
 		"guest_additions_interface":    &hcldec.AttrSpec{Name: "guest_additions_interface", Type: cty.String, Required: false},

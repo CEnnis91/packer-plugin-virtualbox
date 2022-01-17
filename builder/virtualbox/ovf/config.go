@@ -93,6 +93,7 @@ func (c *Config) Prepare(raws ...interface{}) ([]string, error) {
 				"guest_additions_url",
 				"vboxmanage",
 				"vboxmanage_post",
+				"vboxmanage_pre",
 			},
 		},
 	}, raws...)

@@ -113,6 +113,7 @@ type FlatConfig struct {
 	USB                       *bool             `mapstructure:"usb" required:"false" cty:"usb" hcl:"usb"`
 	VBoxManage                [][]string        `mapstructure:"vboxmanage" required:"false" cty:"vboxmanage" hcl:"vboxmanage"`
 	VBoxManagePost            [][]string        `mapstructure:"vboxmanage_post" required:"false" cty:"vboxmanage_post" hcl:"vboxmanage_post"`
+	VBoxManagePre             [][]string        `mapstructure:"vboxmanage_pre" required:"false" cty:"vboxmanage_pre" hcl:"vboxmanage_pre"`
 	VBoxVersionFile           *string           `mapstructure:"virtualbox_version_file" required:"false" cty:"virtualbox_version_file" hcl:"virtualbox_version_file"`
 	BundleISO                 *bool             `mapstructure:"bundle_iso" required:"false" cty:"bundle_iso" hcl:"bundle_iso"`
 	GuestAdditionsMode        *string           `mapstructure:"guest_additions_mode" cty:"guest_additions_mode" hcl:"guest_additions_mode"`
@@ -259,6 +260,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"usb":                          &hcldec.AttrSpec{Name: "usb", Type: cty.Bool, Required: false},
 		"vboxmanage":                   &hcldec.AttrSpec{Name: "vboxmanage", Type: cty.List(cty.List(cty.String)), Required: false},
 		"vboxmanage_post":              &hcldec.AttrSpec{Name: "vboxmanage_post", Type: cty.List(cty.List(cty.String)), Required: false},
+		"vboxmanage_pre":               &hcldec.AttrSpec{Name: "vboxmanage_pre", Type: cty.List(cty.List(cty.String)), Required: false},
 		"virtualbox_version_file":      &hcldec.AttrSpec{Name: "virtualbox_version_file", Type: cty.String, Required: false},
 		"bundle_iso":                   &hcldec.AttrSpec{Name: "bundle_iso", Type: cty.Bool, Required: false},
 		"guest_additions_mode":         &hcldec.AttrSpec{Name: "guest_additions_mode", Type: cty.String, Required: false},

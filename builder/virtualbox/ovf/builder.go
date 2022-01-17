@@ -91,6 +91,10 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 			ImportFlags:    b.config.ImportFlags,
 			KeepRegistered: b.config.KeepRegistered,
 		},
+		&vboxcommon.StepVBoxManage{
+			Commands: b.config.VBoxManagePre,
+			Ctx:      b.config.ctx,
+		},
 		&vboxcommon.StepAttachISOs{
 			AttachBootISO:           false,
 			ISOInterface:            b.config.GuestAdditionsInterface,

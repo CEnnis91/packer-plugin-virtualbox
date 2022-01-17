@@ -75,6 +75,10 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 		&StepImport{
 			Name: b.config.VMName,
 		},
+		&vboxcommon.StepVBoxManage{
+			Commands: b.config.VBoxManagePre,
+			Ctx:      b.config.ctx,
+		},
 		&vboxcommon.StepAttachISOs{
 			AttachBootISO:           false,
 			ISOInterface:            b.config.GuestAdditionsInterface,

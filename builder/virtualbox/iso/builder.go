@@ -184,6 +184,7 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, []string, error) {
 				"guest_additions_url",
 				"vboxmanage",
 				"vboxmanage_post",
+				"vboxmanage_pre",
 			},
 		},
 	}, raws...)
@@ -416,6 +417,10 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 		new(vboxcommon.StepSuppressMessages),
 		new(stepCreateVM),
 		new(stepCreateDisk),
+		&vboxcommon.StepVBoxManage{
+			Commands: b.config.VBoxManagePre,
+			Ctx:      b.config.ctx,
+		},
 		&vboxcommon.StepAttachISOs{
 			AttachBootISO:           true,
 			ISOInterface:            b.config.ISOInterface,
